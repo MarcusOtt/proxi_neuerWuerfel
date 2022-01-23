@@ -77,15 +77,21 @@ serial.redirectToUSB()
 basic.forever(function () {
     serial.writeValue("links", Proxi.Lese_LBlock())
     serial.writeValue("rechts", Proxi.Lese_RBlock())
+    serial.writeValue("licht", 0)
     if (Proxi.RBlock(150) && Proxi.LBlock(150)) {
         Proxi.rückwärts()
     } else if (Proxi.RBlock(150) && !(Proxi.LBlock(150))) {
         Proxi.linksdrehung()
     } else if (!(Proxi.RBlock(150)) && Proxi.LBlock(150)) {
         Proxi.rechtsdrehung()
-    } else {
+    } else if (!(Proxi.RBlock(150)) && !(Proxi.LBlock(150))) {
+        if (input.lightLevel() > 0) {
+            Proxi.vorwärts()
+        }
+        basic.pause(100)
         Proxi.drehungsstopp()
         Proxi.stehenbleiben()
+    } else {
+    	
     }
-    basic.pause(100)
 })
