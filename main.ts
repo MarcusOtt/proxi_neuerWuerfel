@@ -34,66 +34,79 @@ function image () {
     }
 }
 input.onButtonPressed(Button.A, function () {
-    z = 0
+    basic.showIcon(IconNames.Happy)
 })
 input.onGesture(Gesture.Shake, function () {
-    z = 1
-    w = 1
     basic.clearScreen()
-})
-let y = 0
-let z = 0
-let wuerfel = 0
-let w = 0
-music.startMelody(music.builtInMelody(Melodies.Blues), MelodyOptions.OnceInBackground)
-w = 0
-wuerfel = 0
-z = 0
-basic.forever(function () {
-    if (z == 0) {
-        basic.showIcon(IconNames.Happy)
-        basic.pause(500)
+    wuerfel = randint(1, 6)
+    if (wuerfel == 1) {
         basic.showLeds(`
             . . . . .
-            # . # . .
             . . . . .
-            # . . . #
-            . # # # .
+            . . # . .
+            . . . . .
+            . . . . .
             `)
-        basic.pause(500)
+    } else if (wuerfel == 2) {
         basic.showLeds(`
             . . . . .
-            . . # . #
+            . # . . .
             . . . . .
-            # . . . #
-            . # # # .
+            . . . # .
+            . . . . .
             `)
-        basic.pause(500)
+    } else if (wuerfel == 3) {
+        basic.showLeds(`
+            . . . . .
+            . # . . .
+            . . # . .
+            . . . # .
+            . . . . .
+            `)
+    } else if (wuerfel == 4) {
+        basic.showLeds(`
+            . . . . .
+            . # . # .
+            . . . . .
+            . # . # .
+            . . . . .
+            `)
+    } else if (wuerfel == 5) {
+        basic.showLeds(`
+            . . . . .
+            . # . # .
+            . . # . .
+            . # . # .
+            . . . . .
+            `)
     } else {
-        if (w == 1) {
-            for (let index = 0; index < 10; index++) {
-                wuerfel = 1 + randint(0, 5)
-                music.playTone(523, music.beat(BeatFraction.Sixteenth))
-                if (wuerfel == y) {
-                    if (wuerfel > 1 == wuerfel < 6) {
-                        wuerfel = wuerfel + 1
-                    }
-                    if (wuerfel == 6) {
-                        wuerfel = 5
-                    }
-                    if (wuerfel == 1) {
-                        wuerfel = 2
-                    }
-                }
-                image()
-                basic.pause(200)
-                basic.clearScreen()
-                y = wuerfel
-            }
-            wuerfel = 1 + randint(0, 5)
-            music.startMelody(music.builtInMelody(Melodies.JumpDown), MelodyOptions.Once)
-            image()
-            w = 0
-        }
+        basic.showLeds(`
+            . . . . .
+            . # . # .
+            . # . # .
+            . # . # .
+            . . . . .
+            `)
+    }
+})
+input.onButtonPressed(Button.AB, function () {
+    basic.showIcon(IconNames.Angry)
+})
+input.onButtonPressed(Button.B, function () {
+    basic.showIcon(IconNames.Sad)
+})
+let wuerfel = 0
+basic.showLeds(`
+    . # . # .
+    . . . . .
+    # . . . #
+    . # . # .
+    . . # . .
+    `)
+basic.forever(function () {
+    if (Proxi.RBlock(512)) {
+    	
+    } else {
+        music.playMelody("C5 B C5 B C5 B C5 B ", 120)
     }
 })
