@@ -68,10 +68,24 @@ basic.showLeds(`
     . # . # .
     . . # . .
     `)
+serial.redirect(
+SerialPin.USB_TX,
+SerialPin.USB_RX,
+BaudRate.BaudRate115200
+)
+serial.redirectToUSB()
 basic.forever(function () {
-    if (Proxi.RBlock(512)) {
-    	
+    serial.writeValue("links", Proxi.Lese_LBlock())
+    serial.writeValue("rechts", Proxi.Lese_RBlock())
+    if (Proxi.RBlock(150) && Proxi.LBlock(150)) {
+        Proxi.rückwärts()
+    } else if (Proxi.RBlock(150) && !(Proxi.LBlock(150))) {
+        Proxi.linksdrehung()
+    } else if (!(Proxi.RBlock(150)) && Proxi.LBlock(150)) {
+        Proxi.rechtsdrehung()
     } else {
-        music.playMelody("C5 B C5 B C5 B C5 B ", 120)
+        Proxi.drehungsstopp()
+        Proxi.stehenbleiben()
     }
+    basic.pause(100)
 })
