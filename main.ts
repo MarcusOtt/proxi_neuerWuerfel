@@ -1,38 +1,3 @@
-function image () {
-    if (wuerfel == 1) {
-        led.plot(2, 2)
-    }
-    if (wuerfel == 2) {
-        led.plot(1, 3)
-        led.plot(3, 1)
-    }
-    if (wuerfel == 3) {
-        led.plot(0, 4)
-        led.plot(2, 2)
-        led.plot(4, 0)
-    }
-    if (wuerfel == 4) {
-        led.plot(1, 1)
-        led.plot(1, 3)
-        led.plot(3, 1)
-        led.plot(3, 3)
-    }
-    if (wuerfel == 5) {
-        led.plot(1, 1)
-        led.plot(1, 3)
-        led.plot(2, 2)
-        led.plot(3, 1)
-        led.plot(3, 3)
-    }
-    if (wuerfel == 6) {
-        led.plot(1, 0)
-        led.plot(1, 2)
-        led.plot(1, 4)
-        led.plot(3, 0)
-        led.plot(3, 2)
-        led.plot(3, 4)
-    }
-}
 input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.Happy)
 })
